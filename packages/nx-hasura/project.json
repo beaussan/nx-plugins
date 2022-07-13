@@ -1,0 +1,60 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/nx-hasura/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/nx-hasura",
+        "main": "packages/nx-hasura/src/index.ts",
+        "tsConfig": "packages/nx-hasura/tsconfig.lib.json",
+        "assets": [
+          "packages/nx-hasura/*.md",
+          {
+            "input": "./packages/nx-hasura/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/nx-hasura/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/nx-hasura",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/nx-hasura",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/nx-hasura/**/*.ts",
+          "packages/nx-hasura/generators.json",
+          "packages/nx-hasura/executors.json",
+          "packages/nx-hasura/package.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/nx-hasura"],
+      "options": {
+        "jestConfig": "packages/nx-hasura/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
