@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     container_name: <%= projectName %>-graphql-engine-postgres
     volumes:
-      - db_pronostix:/var/lib/postgresql/data
+      - db_<%= projectName %>:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
@@ -32,4 +32,4 @@ services:
       ACTION_MASTER_TOKEN: '${HASURA_ACTION_MASTER_TOKEN}'
 
 volumes:
-  db_pronostix: {}
+  db_<%= projectName %>: {}

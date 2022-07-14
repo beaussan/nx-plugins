@@ -77,7 +77,16 @@ export default async function (tree: Tree, options: NxHasuraGeneratorSchema) {
     root: normalizedOptions.projectRoot,
     projectType: 'application',
     sourceRoot: `${normalizedOptions.projectRoot}`,
-    targets: {},
+    targets: {
+      build: {
+        executor: '@beaussan/nx-hasura:build',
+        options: {},
+      },
+      serve: {
+        executor: '@beaussan/nx-hasura:serve',
+        options: {},
+      },
+    },
     tags: normalizedOptions.parsedTags,
   });
   addFiles(tree, normalizedOptions);
